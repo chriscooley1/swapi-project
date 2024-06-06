@@ -1,5 +1,98 @@
-body {
-    background-color: #1f1f1f;
-    color: #e7e7e7;
+:root {
+    /* rgb for the actual saber color */
+    --saber-r: 0;
+    --saber-g: 0;
+    --saber-b: 255;
+  
+    --saber-color: rgba(var(--saber-r), var(--saber-g), var(--saber-b), 1);
+    --saber-color-gradient: rgba(var(--saber-r), var(--saber-g), var(--saber-b), .7);
+    --saber-box-shadow: rgba(var(--saber-r), var(--saber-g), var(--saber-b), .5);
+  }
+  
+  body {
     font-family: Arial, sans-serif;
-}
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* Hide the default cursor */
+    cursor: none;
+  }
+  
+  button {
+    cursor: none;
+  }
+  
+  #custom-cursor {
+    position: absolute;
+    width: 10px;
+    height: 40px;
+    background-color: #1f1f1fdd;
+    border-radius: 0 0 5px 5px;
+    border: 2px solid #888686;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    /* Prevents cursor from interfering with other elements */
+    pointer-events: none;
+    /* Ensure rotation happens around the center */
+    transform-origin: 50% 50%;
+  }
+  
+  #blade {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    /* Start with height 0 */
+    height: 0;
+    background: linear-gradient(to bottom, var(--saber-color), var(--saber-color-gradient));
+    box-shadow: 0 0 20px 10px var(--saber-box-shadow);
+    border-radius: 5px 5px 0 0;
+    transition: height 0.2s ease-in-out;
+  }
+  
+  #output {
+    /* Set text color to yellow */
+    color: yellow;
+    /* Use a Star Wars-like font */
+    font-family: "Star Jedi", sans-serif;
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr;
+    align-items: center;
+    /* Height to enable scrolling */
+    width: 100%;
+    height: 60vh;
+    /* Enable vertical scrolling */
+    overflow-y: auto;
+    /* Add some padding for better readability */
+    padding: 20px;
+  }
+  
+  /* Create a scrolling effect */
+  @keyframes crawl {
+    0% {
+      transform: translateY(100%);
+    }
+  
+    100% {
+      transform: translateY(calc(-100% + 60vh));
+    }
+  }
+  
+  /* Apply the scrolling effect to the output */
+  #output::before {
+    /* Required for pseudo elements */
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Ensure it's behind the text */
+    z-index: -1;
+    /* Adjust speed as needed */
+    animation: crawl 120s linear infinite;
+  }

@@ -1,0 +1,91 @@
+#fetch-btn {
+    background: linear-gradient(45deg, #ffcc00, #ff6600, #ff0000, #ffcc00);
+    background-size: 400% 400%;
+    color: #222;
+    border: 5px solid transparent;
+    padding: 20px 40px;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    animation: pulse 2s infinite, color-change 5s infinite, spin 10s infinite linear, glow 1.5s infinite alternate, gradient-shift 15s infinite;
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.7);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  #fetch-btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, #ffcc00, #ff6600, #ff0000, #ffcc00);
+    background-size: 400% 400%;
+    z-index: -1;
+    filter: blur(50px);
+    animation: gradient-shift 15s infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      box-shadow: 0 0 20px rgba(255, 204, 0, 0.7);
+    }
+  
+    50% {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px rgba(255, 204, 0, 1);
+    }
+  
+    100% {
+      transform: scale(1);
+      box-shadow: 0 0 20px rgba(255, 204, 0, 0.7);
+    }
+  }
+  
+  @keyframes color-change {
+    0% {
+      background-color: #ffcc00;
+    }
+  
+    33% {
+      background-color: #ff6600;
+    }
+  
+    66% {
+      background-color: #ff0000;
+    }
+  
+    100% {
+      background-color: #ffcc00;
+    }
+  }
+  
+  
+  
+  @keyframes glow {
+    from {
+      border-color: rgba(255, 204, 0, 0.3);
+    }
+  
+    to {
+      border-color: rgba(255, 204, 0, 1);
+    }
+  }
+  
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+  
+    50% {
+      background-position: 100% 50%;
+    }
+  
+    100% {
+      background-position: 0% 50%;
+    }
+  }
