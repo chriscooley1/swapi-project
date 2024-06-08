@@ -48,7 +48,40 @@ const spawnAttackingTieFighter = () => {
         fill: "forwards"
     });
 
+    // Add event listener to blow up TIE fighter when clicked
+    tieFighter.addEventListener("click", (event) => {
+        event.stopPropagation();
+        blowUpTieFighter(tieFighter);
+    });
+
     setTimeout(() => {
-        document.body.removeChild(tieFighter);
+        if (document.body.contains(tieFighter)) {
+            document.body.removeChild(tieFighter);
+        }
     }, animationDuration);
+};
+
+const blowUpTieFighter = (tieFighter) => {
+    // Get current position of TIE fighter
+    const rect = tieFighter.getBoundingClientRect();
+    const explosion = document.createElement("div");
+    explosion.classList.add("explosion");
+    explosion.style.left = `${rect.left + rect.width / 2}px`;
+    explosion.style.top = `${rect.top + rect.height / 2}px`;
+
+    console.log("Explosion coordinates:", explosion.style.left, explosion.style.top);
+
+    document.body.appendChild(explosion);
+
+    const explosionSound = new Audio("sounds/explosion.mp3");
+    explosionSound.play();
+
+    setTimeout(() => {
+        if (document.body.contains(explosion)) {
+            document.body.removeChild(explosion);
+        }
+        if (document.body.contains(tieFighter)) {
+            document.body.removeChild(tieFighter);
+        }
+    }, 1000); // Remove explosion after animation
 };
